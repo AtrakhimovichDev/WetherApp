@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailedWetherInfoView" customModule="WetherApp" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="EO9-IP-INK"/>
+                <outlet property="tableView" destination="IJW-cM-q0J" id="4I7-Ri-thV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="552" height="204"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMM-BG-tEL">
+                    <rect key="frame" x="0.0" y="0.0" width="552" height="204"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IJW-cM-q0J">
+                            <rect key="frame" x="0.0" y="0.0" width="552" height="204"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.29803921570000003" green="0.2784313725" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="IJW-cM-q0J" secondAttribute="bottom" id="Lhs-Cw-0u7"/>
+                        <constraint firstAttribute="trailing" secondItem="IJW-cM-q0J" secondAttribute="trailing" id="Ufj-Hc-jXu"/>
+                        <constraint firstItem="IJW-cM-q0J" firstAttribute="top" secondItem="fMM-BG-tEL" secondAttribute="top" id="Xo6-f3-DVg"/>
+                        <constraint firstItem="IJW-cM-q0J" firstAttribute="leading" secondItem="fMM-BG-tEL" secondAttribute="leading" id="df4-sC-XEc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fMM-BG-tEL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AnQ-1P-jeR"/>
+                <constraint firstAttribute="trailing" secondItem="fMM-BG-tEL" secondAttribute="trailing" id="QqI-AF-Mxc"/>
+                <constraint firstAttribute="bottom" secondItem="fMM-BG-tEL" secondAttribute="bottom" id="lhT-NQ-aqX"/>
+                <constraint firstItem="fMM-BG-tEL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sQ3-vh-78O"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="160.86956521739131" y="-162.05357142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
