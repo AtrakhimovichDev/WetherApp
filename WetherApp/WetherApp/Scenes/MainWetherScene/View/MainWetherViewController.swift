@@ -9,6 +9,7 @@ import UIKit
 
 class MainWetherViewController: UIViewController {
 
+    @IBOutlet weak var cityButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var conditionView: UIView!
     @IBOutlet weak var collectionViewContainer: UIView!
@@ -24,6 +25,7 @@ class MainWetherViewController: UIViewController {
         activityIndicator.startAnimating()
         setupViewModelSettings()
         setupViewControllerSetting()
+        viewModel?.didLoad()
     }
 
     private func setupViewModelSettings() {
@@ -32,6 +34,7 @@ class MainWetherViewController: UIViewController {
             self.temperatureLabel.text = String(wetherModel.temperature)
             self.conditionLabel.text = wetherModel.condition
             self.collectionView.reloadData()
+            self.cityButton.setTitle(wetherModel.location, for: .normal)
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
         }
@@ -43,7 +46,6 @@ class MainWetherViewController: UIViewController {
             let collectionColorString = wetherDecor.collectionViewColor.rawValue
             self.collectionViewContainer.backgroundColor = UIColor.hexStringToUIColor(hex: collectionColorString)
         }
-        viewModel?.didLoad()
     }
 
     private func setupViewControllerSetting() {
