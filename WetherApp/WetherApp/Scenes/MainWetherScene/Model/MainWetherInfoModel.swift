@@ -8,6 +8,7 @@
 import Foundation
 
 struct MainWetherInfoModel {
+    let city: String
     let temperature: Int
     let condition: String
     let daysForecast: [DayForecastModel]

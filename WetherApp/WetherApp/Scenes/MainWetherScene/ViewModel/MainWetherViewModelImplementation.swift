@@ -5,10 +5,12 @@
 //  Created by Andrei Atrakhimovich on 17.08.21.
 //
 
-import Foundation
 import UIKit
+import CoreLocation
 
-class MainWetherViewModelImplementation: MainWetherViewModel {
+class MainWetherViewModelImplementation: NSObject, MainWetherViewModel {
+
+    let locationManager = CLLocationManager()
 
     var didUpdateCurrentWetherInfoModel: ((MainWetherInfoModel) -> Void)?
     var didUpdateCurrentWetherDecorModel: ((WetherDesignModel) -> Void)?
@@ -34,7 +36,14 @@ class MainWetherViewModelImplementation: MainWetherViewModel {
     }
 
     func didLoad() {
-        getWetherData()
+        getDeviceLocation()
+        // getWetherData()
+    }
+
+    private func getDeviceLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
 
     private func getWetherData() {
@@ -46,6 +55,12 @@ class MainWetherViewModelImplementation: MainWetherViewModel {
                     daysForecast: self.fillDaysForecast(wether: wether))
                 self.currentWetherDesign = self.createWetherDecorModel(wether: wether)
             })
+        }
+    }
+
+    private func sendLocationRequest(location: String) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            LocationAPIManager.getLocationData(location: location)
         }
     }
 
@@ -113,5 +128,30 @@ class MainWetherViewModelImplementation: MainWetherViewModel {
             }
         }
         return wetherDecorModel
+    }
+}
+
+extension MainWetherViewModelImplementation: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+            sendLocationRequest(location: "\(latitude),\(longitude)")
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error:: \(error.localizedDescription)")
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways:
+            manager.requestLocation()
+        case .authorizedWhenInUse:
+            manager.requestLocation()
+        default:
+            break
+        }
     }
 }
