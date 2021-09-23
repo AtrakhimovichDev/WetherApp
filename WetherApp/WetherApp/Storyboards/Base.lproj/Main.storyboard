@@ -173,6 +173,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="xFS-gF-tpe" id="3RV-b5-fTW"/>
                         <outlet property="backgroundImageView" destination="pNe-MD-248" id="OlI-rZ-Lbl"/>
+                        <outlet property="cityButton" destination="oqc-AI-mLx" id="71V-OJ-0N0"/>
                         <outlet property="collectionView" destination="9B8-MX-5Lf" id="UFa-7A-ucx"/>
                         <outlet property="collectionViewContainer" destination="vPH-cA-8IB" id="VH4-E1-Za5"/>
                         <outlet property="conditionLabel" destination="rPC-4U-DNY" id="Nkf-18-dxh"/>
@@ -359,7 +360,7 @@
                         <outlet property="conditionView" destination="Hrv-3k-E0T" id="ez9-3T-e3O"/>
                         <outlet property="detailedInfoTableView" destination="6SM-OC-zaJ" id="mRO-dA-xma"/>
                         <outlet property="forecastTableViewContainer" destination="DPC-oz-kGt" id="nxk-54-p2r"/>
-                        <outlet property="hoursForecastTableView" destination="wTA-K7-0R5" id="eJg-fW-GHn"/>
+                        <outlet property="hourlyForecastTableView" destination="wTA-K7-0R5" id="eJg-fW-GHn"/>
                         <outlet property="leadingConstraintWetherContainer" destination="IOp-Fg-xeh" id="Xeo-hz-Yaz"/>
                         <outlet property="temperatureLabel" destination="HiX-0s-fZ3" id="bZK-gL-1Wp"/>
                         <outlet property="trailingConstraintWetherContainer" destination="4Q8-PC-Dr8" id="e7e-pq-cbn"/>
