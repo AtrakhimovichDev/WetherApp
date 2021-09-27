@@ -117,6 +117,10 @@ class DayWetherViewController: UIViewController {
             break
         }
     }
+
+    @IBAction func backButtonPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension DayWetherViewController: ViewAnimationDelegate {

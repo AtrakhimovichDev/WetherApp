@@ -13,7 +13,7 @@ class DayWetherViewModelImplementation: NSObject, DayWetherViewModel {
     var userLocation: UserLocation?
 
     var didUpdateCurrentWetherInfoModel: ((DayWetherModel) -> Void)?
-    var didUpdateCurrentWetherDecorModel: ((WetherDesignModel) -> Void)?
+    var didUpdateCurrentWetherDecorModel: ((DesignModel) -> Void)?
 
     var wetherInfo: DayWetherModel? {
         didSet {
@@ -25,7 +25,7 @@ class DayWetherViewModelImplementation: NSObject, DayWetherViewModel {
         }
     }
 
-    private var currentWetherDesign: WetherDesignModel? {
+    private var currentWetherDesign: DesignModel? {
         didSet {
             if let currentWetherDecor = currentWetherDesign {
                 DispatchQueue.main.async {
@@ -39,13 +39,13 @@ class DayWetherViewModelImplementation: NSObject, DayWetherViewModel {
         super.init()
         createUserLocation()
     }
-    
+
     private func createUserLocation() {
         let userLoc = UserLocationImplementation()
         userLoc.delegate = self
         userLocation = userLoc
     }
-    
+
     func didLoad() {
         userLocation?.getUserLocation()
     }

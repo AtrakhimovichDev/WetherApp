@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MainWetherInfoModel {
+struct WetherModel {
     let location: String
     let temperature: Int
     let condition: String
