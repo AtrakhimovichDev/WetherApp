@@ -10,6 +10,6 @@ import Foundation
 protocol DayWetherViewModel {
     var wetherInfo: DayWetherModel? { get set }
     var didUpdateCurrentWetherInfoModel: ((DayWetherModel) -> Void)? { get set }
-    var didUpdateCurrentWetherDecorModel: ((WetherDesignModel) -> Void)? { get set }
+    var didUpdateCurrentWetherDecorModel: ((DesignModel) -> Void)? { get set }
     func didLoad()
 }

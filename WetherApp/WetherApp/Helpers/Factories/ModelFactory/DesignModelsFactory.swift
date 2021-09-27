@@ -9,8 +9,8 @@ import Foundation
 
 class DesignModelsFactory {
 
-    static func createDesignModel(wether: Wether) -> WetherDesignModel {
-        var wetherDesignModel = WetherDesignModel()
+    static func createDesignModel(wether: Wether) -> DesignModel {
+        var wetherDesignModel = DesignModel()
 
         let wetherConditionCode = wether.current.condition.code
         let wetherCondition =  WetherConditionKeys.init(rawValue: wetherConditionCode)

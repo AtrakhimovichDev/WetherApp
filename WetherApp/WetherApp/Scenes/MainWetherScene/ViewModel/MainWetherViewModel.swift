@@ -8,8 +8,9 @@
 import Foundation
 
 protocol MainWetherViewModel {
-    var currentWether: MainWetherInfoModel? { get set }
-    var didUpdateCurrentWetherInfoModel: ((MainWetherInfoModel) -> Void)? { get set }
-    var didUpdateCurrentWetherDecorModel: ((WetherDesignModel) -> Void)? { get set }
+    var wetherModel: WetherModel? { get set }
+    var didUpdateDataModel: ((WetherModel) -> Void)? { get set }
+    var didUpdateDesignModel: ((DesignModel) -> Void)? { get set }
     func didLoad()
+    func updateData(location: String)
 }

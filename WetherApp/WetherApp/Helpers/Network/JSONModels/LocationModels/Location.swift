@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocationA: Decodable {
+struct Location: Decodable {
     let data: [LocationData]
 }
 

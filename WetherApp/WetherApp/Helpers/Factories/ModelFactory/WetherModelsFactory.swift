@@ -9,8 +9,8 @@ import Foundation
 
 class WetherModelsFactory {
 
-    static func createWetherModel(wether: Wether, location: String) -> MainWetherInfoModel {
-        let wetherModel = MainWetherInfoModel(
+    static func createWetherModel(wether: Wether, location: String) -> WetherModel {
+        let wetherModel = WetherModel(
             location: location,
             temperature: Int(wether.current.temperature),
             condition: wether.current.condition.text,
