@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WetherDesignModel {
+struct DesignModel {
     var backgroundImageName: String = "clear_day"
     var conditionViewColor: Colors = Colors.clearDayCondition
     var collectionViewColor: Colors = Colors.clearDayCollection

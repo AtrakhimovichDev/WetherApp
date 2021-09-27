@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LW9-nH-m9J">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -8,10 +8,76 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Error Network View Controller-->
+        <scene sceneID="fu5-fN-L9I">
+            <objects>
+                <viewController storyboardIdentifier="ErrorNetworkViewController" id="LW9-nH-m9J" customClass="ErrorNetworkViewController" customModule="WetherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z4l-ox-pnG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JjT-kf-AqS">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykD-Gs-Qgg">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No network connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9R-m3-Vs9">
+                                                <rect key="frame" x="105.5" y="388" width="203.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please double-check your internet connection and try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzW-do-4mL">
+                                                <rect key="frame" x="10" y="432" width="394" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="lzW-do-4mL" firstAttribute="top" secondItem="D9R-m3-Vs9" secondAttribute="bottom" constant="20" id="3Zl-vH-hd8"/>
+                                            <constraint firstItem="lzW-do-4mL" firstAttribute="leading" secondItem="ykD-Gs-Qgg" secondAttribute="leading" constant="10" id="Tnj-DX-Lu1"/>
+                                            <constraint firstAttribute="height" constant="800" id="WDa-vq-rhC"/>
+                                            <constraint firstItem="D9R-m3-Vs9" firstAttribute="centerX" secondItem="ykD-Gs-Qgg" secondAttribute="centerX" id="jSk-JC-k12"/>
+                                            <constraint firstItem="D9R-m3-Vs9" firstAttribute="centerY" secondItem="ykD-Gs-Qgg" secondAttribute="centerY" id="t2F-Rk-b5D"/>
+                                            <constraint firstItem="lzW-do-4mL" firstAttribute="centerX" secondItem="ykD-Gs-Qgg" secondAttribute="centerX" id="wW5-b3-XQ3"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ykD-Gs-Qgg" firstAttribute="top" secondItem="Swq-ME-H1H" secondAttribute="top" id="8mq-k5-iws"/>
+                                    <constraint firstItem="ykD-Gs-Qgg" firstAttribute="bottom" secondItem="Swq-ME-H1H" secondAttribute="bottom" id="M17-oQ-uBw"/>
+                                    <constraint firstItem="ykD-Gs-Qgg" firstAttribute="leading" secondItem="Swq-ME-H1H" secondAttribute="leading" id="eSO-Pg-HQO"/>
+                                    <constraint firstItem="ykD-Gs-Qgg" firstAttribute="trailing" secondItem="Swq-ME-H1H" secondAttribute="trailing" id="jc7-W0-EtP"/>
+                                    <constraint firstItem="ykD-Gs-Qgg" firstAttribute="width" secondItem="3fT-og-lA6" secondAttribute="width" id="uvR-Uz-8cw"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Swq-ME-H1H"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="3fT-og-lA6"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8sY-eH-Adh"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8sY-eH-Adh" firstAttribute="bottom" secondItem="JjT-kf-AqS" secondAttribute="bottom" id="0OS-O6-XC1"/>
+                            <constraint firstItem="JjT-kf-AqS" firstAttribute="top" secondItem="8sY-eH-Adh" secondAttribute="top" id="7ba-LH-Pxw"/>
+                            <constraint firstItem="8sY-eH-Adh" firstAttribute="trailing" secondItem="JjT-kf-AqS" secondAttribute="trailing" id="sUo-B1-Z7F"/>
+                            <constraint firstItem="JjT-kf-AqS" firstAttribute="leading" secondItem="8sY-eH-Adh" secondAttribute="leading" id="sm3-u5-Bvc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="JjT-kf-AqS" id="ch6-PY-Owe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Y9-0I-vCd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-384" y="-70"/>
+        </scene>
         <!--Main Wether View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainWetherViewController" customModule="WetherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainWetherViewController" id="BYZ-38-t0r" customClass="MainWetherViewController" customModule="WetherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,6 +106,9 @@
                                         <state key="normal" title="Minsk" image="pencil" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cityButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TdZ-wj-nbx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -170,9 +239,11 @@
                             <constraint firstItem="4iR-K5-h7v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yVr-l4-6E9"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="XlP-MP-hvo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="xFS-gF-tpe" id="3RV-b5-fTW"/>
                         <outlet property="backgroundImageView" destination="pNe-MD-248" id="OlI-rZ-Lbl"/>
+                        <outlet property="cityButton" destination="oqc-AI-mLx" id="71V-OJ-0N0"/>
                         <outlet property="collectionView" destination="9B8-MX-5Lf" id="UFa-7A-ucx"/>
                         <outlet property="collectionViewContainer" destination="vPH-cA-8IB" id="VH4-E1-Za5"/>
                         <outlet property="conditionLabel" destination="rPC-4U-DNY" id="Nkf-18-dxh"/>
@@ -182,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="-70"/>
+            <point key="canvasLocation" x="342" y="-70"/>
         </scene>
         <!--Day Wether View Controller-->
         <scene sceneID="FRT-Bd-2eH">
@@ -207,6 +278,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="arrow.backward" catalog="system"/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="aq6-ig-gog" eventType="touchUpInside" id="Foy-X2-hKj"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -359,7 +433,7 @@
                         <outlet property="conditionView" destination="Hrv-3k-E0T" id="ez9-3T-e3O"/>
                         <outlet property="detailedInfoTableView" destination="6SM-OC-zaJ" id="mRO-dA-xma"/>
                         <outlet property="forecastTableViewContainer" destination="DPC-oz-kGt" id="nxk-54-p2r"/>
-                        <outlet property="hoursForecastTableView" destination="wTA-K7-0R5" id="eJg-fW-GHn"/>
+                        <outlet property="hourlyForecastTableView" destination="wTA-K7-0R5" id="eJg-fW-GHn"/>
                         <outlet property="leadingConstraintWetherContainer" destination="IOp-Fg-xeh" id="Xeo-hz-Yaz"/>
                         <outlet property="temperatureLabel" destination="HiX-0s-fZ3" id="bZK-gL-1Wp"/>
                         <outlet property="trailingConstraintWetherContainer" destination="4Q8-PC-Dr8" id="e7e-pq-cbn"/>
@@ -368,7 +442,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XfV-r3-tgV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="722" y="-70"/>
+            <point key="canvasLocation" x="1070" y="-70"/>
+        </scene>
+        <!--City View Controller-->
+        <scene sceneID="pwV-Iq-WRp">
+            <objects>
+                <viewController storyboardIdentifier="CitySearchViewController" id="CGj-yW-tK5" customClass="CityViewController" customModule="WetherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hja-fA-MS1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="9B8-dY-5Ca"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D8m-yg-GH0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1789.8550724637682" y="-70.3125"/>
         </scene>
     </scenes>
     <resources>

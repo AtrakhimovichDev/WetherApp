@@ -9,23 +9,25 @@ import UIKit
 
 class DayWetherViewController: UIViewController {
 
-    @IBOutlet weak var trailingConstraintWetherContainer: NSLayoutConstraint!
-    @IBOutlet weak var leadingConstraintWetherContainer: NSLayoutConstraint!
-    @IBOutlet weak var hoursForecastTableView: UITableView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var conditionView: UIView!
     @IBOutlet weak var conditionLabel: UILabel!
-    @IBOutlet weak var wetherContainerView: UIView!
+    @IBOutlet weak var hourlyForecastTableView: UITableView!
     @IBOutlet weak var detailedInfoTableView: UITableView!
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var forecastTableViewContainer: UIView!
-    var viewModel: DayWetherViewModel?
 
-    var startLocationX: CGFloat = .zero
+    @IBOutlet weak var conditionView: UIView!
+    @IBOutlet weak var wetherContainerView: UIView!
+    @IBOutlet weak var forecastTableViewContainer: UIView!
+
+    @IBOutlet weak var trailingConstraintWetherContainer: NSLayoutConstraint!
+    @IBOutlet weak var leadingConstraintWetherContainer: NSLayoutConstraint!
+
+    var viewModel: DayWetherViewModel?
+    var animationController: ViewAnimation?
     var tableController: DetailedInfoTableController?
     var hourlyForecastTableController: HourlyForecastTableController?
+    var startLocationX: CGFloat = .zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,25 +37,42 @@ class DayWetherViewController: UIViewController {
     }
 
     private func setupViewControllerSettings() {
-        tableController = DetailedInfoTableController()
-        hourlyForecastTableController = HourlyForecastTableController()
-        detailedInfoTableView.dataSource = tableController
-        // detailedInfoTableView.delegate = detailedInfoTableController
-        hoursForecastTableView.dataSource = hourlyForecastTableController
-
-        var nibName = String(describing: DetailedInfoTableViewCell.self)
-        var nib = UINib(nibName: nibName, bundle: nil)
-        detailedInfoTableView.register(nib, forCellReuseIdentifier: DetailedInfoTableViewCell.identifier)
-
-        nibName = String(describing: HourForecastTableViewCell.self)
-        nib = UINib(nibName: nibName, bundle: nil)
-        hoursForecastTableView.register(nib, forCellReuseIdentifier: HourForecastTableViewCell.identifier)
-
-        wetherContainerView.layer.cornerRadius = 10
-        forecastTableViewContainer.layer.cornerRadius = 10
-        conditionView.layer.cornerRadius = 15
+        setupDetailedInfoTable()
+        setupHourForecastTable()
+        setupViewAnimationController()
+        setupViewsSettings()
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(moveContainerWetherView(sender:)))
         wetherContainerView.addGestureRecognizer(panGesture)
+    }
+
+    private func setupDetailedInfoTable() {
+        tableController = DetailedInfoTableController()
+        detailedInfoTableView.dataSource = tableController
+        let nibName = String(describing: DetailedInfoTableViewCell.self)
+        let nib = UINib(nibName: nibName, bundle: nil)
+        detailedInfoTableView.register(nib, forCellReuseIdentifier: DetailedInfoTableViewCell.identifier)
+    }
+
+    private func setupHourForecastTable() {
+        hourlyForecastTableController = HourlyForecastTableController()
+        hourlyForecastTableView.dataSource = hourlyForecastTableController
+        let nibName = String(describing: HourForecastTableViewCell.self)
+        let nib = UINib(nibName: nibName, bundle: nil)
+        hourlyForecastTableView.register(nib, forCellReuseIdentifier: HourForecastTableViewCell.identifier)
+    }
+
+    private func setupViewsSettings() {
+        conditionView.layer.cornerRadius = 15
+        wetherContainerView.layer.cornerRadius = 10
+        forecastTableViewContainer.layer.cornerRadius = 10
+    }
+
+    private func setupViewAnimationController() {
+        animationController = ViewAnimation(mainView: view,
+                                            movingView: wetherContainerView,
+                                            leftConstraint: leadingConstraintWetherContainer,
+                                            rightConstraint: trailingConstraintWetherContainer)
+        animationController?.delegate = self
     }
 
     private func setupViewModel() {
@@ -64,7 +83,7 @@ class DayWetherViewController: UIViewController {
             self.tableController?.wetherModel = wetherModel
             self.hourlyForecastTableController?.wetherModel = wetherModel
             self.detailedInfoTableView.reloadData()
-            self.hoursForecastTableView.reloadData()
+            self.hourlyForecastTableView.reloadData()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
         }
@@ -86,82 +105,27 @@ class DayWetherViewController: UIViewController {
         case .began:
             startLocationX = sender.location(in: view).x
         case .changed:
-            // wetherContainerView.frame.origin.x += sender.translation(in: view).x
             leadingConstraintWetherContainer.constant += sender.translation(in: view).x
             trailingConstraintWetherContainer.constant -= sender.translation(in: view).x
             view.layoutIfNeeded()
             sender.setTranslation(.zero, in: view)
         case .ended:
-            makeGalleryAnimation(senderLastLocationX: sender.location(in: view).x)
+            animationController?.makeViewAnimation(
+                startLocation: startLocationX,
+                lastLocation: sender.location(in: view).x)
         default:
             break
         }
     }
 
-    private func makeGalleryAnimation(senderLastLocationX: CGFloat) {
-        if senderLastLocationX < startLocationX {
-            if wetherContainerView.frame.minX < 0 {
-                makeLeftSideAnimation()
-            } else {
-                makeNormaStateAnimation()
-            }
-        } else {
-            if wetherContainerView.frame.maxX > view.frame.width {
-                makeRightSideAnimation()
-            } else {
-                makeNormaStateAnimation()
-            }
-        }
+    @IBAction func backButtonPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
+}
 
-    private func makeLeftSideAnimation() {
-        moveImageView(leftConstraint: -wetherContainerView.frame.width,
-                      rightConstraint: view.frame.width,
-                      view: wetherContainerView,
-                      alpha: 0) { [weak self] _ in
-            self?.tableController?.changeWetherInfoType()
-            self?.detailedInfoTableView.reloadData()
-            self?.wetherContainerView.frame.origin.x = self?.view.frame.maxX ?? 0
-            self?.moveImageView(leftConstraint: 60,
-                                rightConstraint: 60,
-                                view: self?.wetherContainerView,
-                                alpha: 1,
-                                completion: nil)
-        }
-    }
-
-    private func makeRightSideAnimation() {
-        moveImageView(leftConstraint: view.frame.maxX,
-                      rightConstraint: -wetherContainerView.frame.width,
-                      view: wetherContainerView,
-                      alpha: 0) { [weak self] _ in
-            self?.tableController?.changeWetherInfoType()
-            self?.detailedInfoTableView.reloadData()
-            self?.wetherContainerView.frame.origin.x = -(self?.wetherContainerView.frame.width ?? 0)
-            self?.moveImageView(leftConstraint: 60,
-                                rightConstraint: 60,
-                                view: self?.wetherContainerView,
-                                alpha: 1,
-                                completion: nil)
-        }
-    }
-
-    private func makeNormaStateAnimation() {
-        moveImageView(leftConstraint: 60, rightConstraint: 60, view: wetherContainerView, alpha: 1, completion: nil)
-    }
-
-    private func moveImageView(leftConstraint: CGFloat,
-                               rightConstraint: CGFloat,
-                               view: UIView?,
-                               alpha: CGFloat,
-                               completion: ((Bool) -> Void)?) {
-        guard let view = view else { return }
-        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-            self.leadingConstraintWetherContainer.constant = leftConstraint
-            self.trailingConstraintWetherContainer.constant = rightConstraint
-            view.alpha = alpha
-            self.view.layoutIfNeeded()
-        }, completion: completion)
-
+extension DayWetherViewController: ViewAnimationDelegate {
+    func updateData() {
+        tableController?.changeWetherInfoType()
+        detailedInfoTableView.reloadData()
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewModelsFactory {
-
+    
     static func createDayWetherViewModel() -> DayWetherViewModel {
         let viewModel = DayWetherViewModelImplementation()
         return viewModel
@@ -16,6 +16,11 @@ class ViewModelsFactory {
 
     static func createMainWetherViewModel() -> MainWetherViewModel {
         let viewModel = MainWetherViewModelImplementation()
+        return viewModel
+    }
+
+    static func createCityViewModel() -> CityViewModel {
+        let viewModel = CityViewModelImplementation()
         return viewModel
     }
 }
